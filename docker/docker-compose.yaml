@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: device-manager-service-postgres
+    image: postgres:12.1-alpine
+    ports:
+      - "5432:5432"
+    healthcheck:
+      interval: 1s
+      timeout: 30s
+      retries: 30
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: device
+      POSTGRES_PASSWORD: Device@123
+      POSTGRES_DB: device-manager-service
+    networks:
+      - postgres-compose-network
+
+networks:
+  postgres-compose-network:
+    driver: bridge
+
+volumes:
+  pgdata:
