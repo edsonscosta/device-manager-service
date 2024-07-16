@@ -1,0 +1,11 @@
+#.mockery.yaml
+
+with-expecter: true
+
+packages:
+  device-manager-service/internal/device:
+    config:
+    interfaces:
+      IDeviceService:
+        output: device-manager-service/internal/device/mocks
+        filename: device_service_mock.go
