@@ -151,5 +151,5 @@ The `\db\migrations\` contains the database schema, and the `pq` library is used
 To get started with the project, simply run `docker-compose up` to start the development environment. Then, you can use a tool like `curl` or a REST client to interact with the API endpoints.
 
 ### Build/Run Scripts
-    docker-compose -f docker/docker-compose.yaml -d
+    docker-compose -f docker/docker-compose.yaml up -d
     go run cmd/api/*.go
