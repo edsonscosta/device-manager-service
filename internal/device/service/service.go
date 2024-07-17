@@ -23,7 +23,7 @@ func (d Device) GetByID(deviceID uuid.UUID) (*model.Device, error) {
 	return d.deviceRepository.Get(deviceID)
 }
 
-func (d Device) GetByAll(limit int, offset int, brand string) ([]*model.Device, error) {
+func (d Device) GetAll(limit int, offset int, brand string) ([]*model.Device, error) {
 	return d.deviceRepository.GetAll(limit, offset, brand)
 }
 

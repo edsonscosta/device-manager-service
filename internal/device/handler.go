@@ -184,7 +184,7 @@ func (h Handler) GetAll(c *gin.Context) {
 
 	offset := limit * (page - 1)
 
-	devices, err := h.deviceService.GetByAll(limit, offset, brand)
+	devices, err := h.deviceService.GetAll(limit, offset, brand)
 	if err != nil {
 		c.IndentedJSON(http.StatusInternalServerError, gin.H{"message": fmt.Sprintf("error Getting All Devices %s", err.Error())})
 		return

@@ -116,11 +116,11 @@ func (_c *MockIDeviceService_Delete_Call) RunAndReturn(run func(uuid.UUID) error
 }
 
 // GetByAll provides a mock function with given fields: limit, offset, brand
-func (_m *MockIDeviceService) GetByAll(limit int, offset int, brand string) ([]*model.Device, error) {
+func (_m *MockIDeviceService) GetAll(limit int, offset int, brand string) ([]*model.Device, error) {
 	ret := _m.Called(limit, offset, brand)
 
 	if len(ret) == 0 {
-		panic("no return value specified for GetByAll")
+		panic("no return value specified for GetAll")
 	}
 
 	var r0 []*model.Device
@@ -145,7 +145,7 @@ func (_m *MockIDeviceService) GetByAll(limit int, offset int, brand string) ([]*
 	return r0, r1
 }
 
-// MockIDeviceService_GetByAll_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetByAll'
+// MockIDeviceService_GetByAll_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetAll'
 type MockIDeviceService_GetByAll_Call struct {
 	*mock.Call
 }
@@ -155,7 +155,7 @@ type MockIDeviceService_GetByAll_Call struct {
 //   - offset int
 //   - brand string
 func (_e *MockIDeviceService_Expecter) GetByAll(limit interface{}, offset interface{}, brand interface{}) *MockIDeviceService_GetByAll_Call {
-	return &MockIDeviceService_GetByAll_Call{Call: _e.mock.On("GetByAll", limit, offset, brand)}
+	return &MockIDeviceService_GetByAll_Call{Call: _e.mock.On("GetAll", limit, offset, brand)}
 }
 
 func (_c *MockIDeviceService_GetByAll_Call) Run(run func(limit int, offset int, brand string)) *MockIDeviceService_GetByAll_Call {
