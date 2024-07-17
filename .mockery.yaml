@@ -1,11 +1,9 @@
-#.mockery.yaml
-
-with-expecter: true
-
 packages:
-  device-manager-service/internal/device:
+  device-manager-service/internal/device/interfaces:
     config:
+      recursive: true
+      with-expecter: true
     interfaces:
-      IDeviceService:
-        output: device-manager-service/internal/device/mocks
-        filename: device_service_mock.go
+      IDeviceService: 
+        output: internal/mocks
+      IDeviceRepository:
