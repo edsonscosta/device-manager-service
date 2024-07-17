@@ -72,8 +72,9 @@ func (r DeviceRepository) GetAll(limit int, offset int, brand string) ([]*model.
 
 func (r DeviceRepository) Create(device *model.Device) error {
 	_, err := r.db.Exec("INSERT INTO devices "+
-		"(name, brand, is_active, created_at, updated_at) "+
-		"VALUES ($1, $2, $3, $4, $5) RETURNING *",
+		"(device_id, name, brand, is_active, created_at, updated_at) "+
+		"VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+		device.DeviceID,
 		device.Name,
 		device.Brand,
 		device.IsActive,
