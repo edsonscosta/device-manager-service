@@ -16,7 +16,24 @@ var (
 	logger = log.New(os.Stderr, "device-manager-service-api", 0)
 )
 
-// mockgen -destination=internal/service/mocks/mock.go -package=mocks device-manager-service/internal/device/interfaces IDeviceRepository
+func TestDevice_GetByID(t *testing.T) {
+	deviceRepo := interfaces.NewMockIDeviceRepository(t)
+	deviceRepo.EXPECT().Get(mock.Anything).Return(
+		&model.Device{
+			DeviceID:  uuid.New(),
+			Name:      "Name",
+			Brand:     "Brand",
+			IsActive:  true,
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+		},
+		nil)
+
+	deviceService := NewDeviceService(logger, deviceRepo)
+	deviceService.GetByID(uuid.New())
+	assert.True(t, deviceRepo.AssertCalled(t, "Get", mock.Anything))
+}
+
 func TestDevice_Create(t *testing.T) {
 	deviceRepo := interfaces.NewMockIDeviceRepository(t)
 	deviceRepo.EXPECT().Create(mock.Anything).Return(nil)
