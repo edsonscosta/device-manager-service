@@ -1,8 +1,8 @@
-package device
+package handler
 
 import (
 	"database/sql"
-	"device-manager-service/internal/device/contracts"
+	"device-manager-service/cmd/api/contracts"
 	"device-manager-service/internal/device/interfaces"
 	deviceModel "device-manager-service/internal/device/model"
 	"device-manager-service/internal/device/repository"
@@ -134,7 +134,7 @@ func (h Handler) Patch(c *gin.Context) {
 
 	err = h.deviceService.Update(device)
 	if err != nil {
-		c.IndentedJSON(http.StatusInternalServerError, gin.H{"message": fmt.Sprintf("error Updating Brand the IDeviceService %s", err.Error())})
+		c.IndentedJSON(http.StatusInternalServerError, buildReturnErrorMessage("error Updating Brand the IDeviceService", err))
 		return
 	}
 
@@ -144,13 +144,13 @@ func (h Handler) Patch(c *gin.Context) {
 func (h Handler) Delete(c *gin.Context) {
 	deviceID, err := uuid.Parse(c.Param("id"))
 	if err != nil {
-		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("invalid deviceID Parameter %s", err)})
+		c.IndentedJSON(http.StatusBadRequest, buildReturnErrorMessage("invalid deviceID Parameter", err))
 		return
 	}
 
 	err = h.deviceService.Delete(deviceID)
 	if err != nil {
-		c.IndentedJSON(http.StatusInternalServerError, gin.H{"message": fmt.Sprintf("error Deleting the IDeviceService %s", err.Error())})
+		c.IndentedJSON(http.StatusInternalServerError, buildReturnErrorMessage("error Deleting the IDeviceService", err))
 		return
 	}
 
@@ -160,17 +160,17 @@ func (h Handler) Delete(c *gin.Context) {
 func (h Handler) Get(c *gin.Context) {
 	deviceID, err := uuid.Parse(c.Param("id"))
 	if err != nil {
-		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("invalid deviceID Parameter %s", err)})
+		c.IndentedJSON(http.StatusBadRequest, buildReturnErrorMessage("invalid deviceID Parameter", err))
 		return
 	}
 
 	device, err := h.deviceService.GetByID(deviceID)
 	if err != nil {
-		c.IndentedJSON(http.StatusInternalServerError, gin.H{"message": fmt.Sprintf("error Getting the IDeviceService %s", err.Error())})
+		c.IndentedJSON(http.StatusInternalServerError, buildReturnErrorMessage("error Getting the IDeviceService", err))
 		return
 	}
 	if device == nil {
-		c.IndentedJSON(http.StatusNotFound, gin.H{"message": fmt.Sprintf("IDeviceService Not Found %s", deviceID)})
+		c.IndentedJSON(http.StatusNotFound, buildReturnErrorMessage(fmt.Sprintf("Device Not Found %s", deviceID), fmt.Errorf("device Not Found")))
 		return
 	}
 
@@ -186,9 +186,15 @@ func (h Handler) GetAll(c *gin.Context) {
 
 	devices, err := h.deviceService.GetAll(limit, offset, brand)
 	if err != nil {
-		c.IndentedJSON(http.StatusInternalServerError, gin.H{"message": fmt.Sprintf("error Getting All Devices %s", err.Error())})
+		c.IndentedJSON(http.StatusInternalServerError, buildReturnErrorMessage("error Getting All Devices %s", err))
 		return
 	}
 
 	c.IndentedJSON(http.StatusOK, devices)
+}
+
+func buildReturnErrorMessage(message string, err error) contracts.ErrorResponse {
+	return contracts.ErrorResponse{
+		Message: fmt.Sprintf("%s %s", message, err.Error()),
+	}
 }

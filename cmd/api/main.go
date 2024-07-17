@@ -2,7 +2,7 @@ package main
 
 import (
 	"database/sql"
-	"device-manager-service/internal/device"
+	"device-manager-service/cmd/api/handler"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 	"github.com/pressly/goose/v3"
@@ -31,7 +31,7 @@ func main() {
 		panic(err)
 	}
 
-	deviceHandler := device.NewDeviceHandler(logger, db)
+	deviceHandler := handler.NewDeviceHandler(logger, db)
 
 	router := gin.Default()
 	api := router.Group("/v1")

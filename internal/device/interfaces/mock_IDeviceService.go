@@ -115,7 +115,7 @@ func (_c *MockIDeviceService_Delete_Call) RunAndReturn(run func(uuid.UUID) error
 	return _c
 }
 
-// GetByAll provides a mock function with given fields: limit, offset, brand
+// GetAll provides a mock function with given fields: limit, offset, brand
 func (_m *MockIDeviceService) GetAll(limit int, offset int, brand string) ([]*model.Device, error) {
 	ret := _m.Called(limit, offset, brand)
 
@@ -145,32 +145,32 @@ func (_m *MockIDeviceService) GetAll(limit int, offset int, brand string) ([]*mo
 	return r0, r1
 }
 
-// MockIDeviceService_GetByAll_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetAll'
-type MockIDeviceService_GetByAll_Call struct {
+// MockIDeviceService_GetAll_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetAll'
+type MockIDeviceService_GetAll_Call struct {
 	*mock.Call
 }
 
-// GetByAll is a helper method to define mock.On call
+// GetAll is a helper method to define mock.On call
 //   - limit int
 //   - offset int
 //   - brand string
-func (_e *MockIDeviceService_Expecter) GetByAll(limit interface{}, offset interface{}, brand interface{}) *MockIDeviceService_GetByAll_Call {
-	return &MockIDeviceService_GetByAll_Call{Call: _e.mock.On("GetAll", limit, offset, brand)}
+func (_e *MockIDeviceService_Expecter) GetAll(limit interface{}, offset interface{}, brand interface{}) *MockIDeviceService_GetAll_Call {
+	return &MockIDeviceService_GetAll_Call{Call: _e.mock.On("GetAll", limit, offset, brand)}
 }
 
-func (_c *MockIDeviceService_GetByAll_Call) Run(run func(limit int, offset int, brand string)) *MockIDeviceService_GetByAll_Call {
+func (_c *MockIDeviceService_GetAll_Call) Run(run func(limit int, offset int, brand string)) *MockIDeviceService_GetAll_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].(int), args[1].(int), args[2].(string))
 	})
 	return _c
 }
 
-func (_c *MockIDeviceService_GetByAll_Call) Return(_a0 []*model.Device, _a1 error) *MockIDeviceService_GetByAll_Call {
+func (_c *MockIDeviceService_GetAll_Call) Return(_a0 []*model.Device, _a1 error) *MockIDeviceService_GetAll_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *MockIDeviceService_GetByAll_Call) RunAndReturn(run func(int, int, string) ([]*model.Device, error)) *MockIDeviceService_GetByAll_Call {
+func (_c *MockIDeviceService_GetAll_Call) RunAndReturn(run func(int, int, string) ([]*model.Device, error)) *MockIDeviceService_GetAll_Call {
 	_c.Call.Return(run)
 	return _c
 }
